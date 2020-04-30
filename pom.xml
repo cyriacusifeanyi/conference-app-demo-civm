@@ -67,6 +67,11 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <!--The below configuration allows you to run on linux/unix using the
+                "./hospital-management-system-0.0.1-SNAPSHOT.jar"-->
+                <configuration>
+                    <executable>true</executable>
+                </configuration>
             </plugin>
         </plugins>
     </build>
