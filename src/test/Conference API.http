@@ -1,0 +1,60 @@
+GET http://localhost:5000/api/v1/
+Accept: application/json
+
+###
+
+GET http://localhost:5000/api/v1/sessions?page=2&size=20
+Accept: application/json
+###
+
+GET http://localhost:5000/api/v1/sessions
+###
+POST localhost:5000/api/v1/sessions
+Content-Type: application/json
+
+{"session_name": "SME forum_2",
+  "session_description": "brought to you by Nairametric",
+  "session_length": 180,
+  "speakers": [
+    {
+      "speaker_id": 43
+    }
+  ]
+}
+
+###
+GET localhost:5000/api/v1/sessions/2
+Accept: application/json
+
+###
+
+GET localhost:5000/api/v1/speakers/1/
+
+Accept: application/json
+
+###
+
+PATCH localhost:5000/api/v1/speakers/7/
+Content-Type: application/json
+
+{"first_name": "Simi",
+  "last_name": "Gold",
+  "title": "Musician"
+}
+
+###
+PUT localhost:5000/api/v1/speakers/5
+Content-Type: application/json
+
+ {
+    "first_name": "Ifeanyi",
+    "last_name": "Cyriacus",
+    "title": "Chief Technology Officer",
+    "company": "CIVM Technology",
+    "speaker_bio": "test",
+    "speaker_photo": null
+  }
+
+###
+
+
