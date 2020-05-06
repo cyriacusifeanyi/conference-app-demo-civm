@@ -28,8 +28,23 @@ public class Session {
             inverseJoinColumns = @JoinColumn(name = "speaker_id"))
     private List<Speaker> speakers;
 
+    @ManyToMany
+    @JoinTable(
+            name = "session_participant",
+            joinColumns = @JoinColumn(name = "session_id"),
+            inverseJoinColumns = @JoinColumn(name = "participant_id"))
+    private List<Participant> participants;
+
     public Session(){
 
+    }
+
+    public List<Participant> getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(List<Participant> participants) {
+        this.participants = participants;
     }
 
     public List<Speaker> getSpeakers() {

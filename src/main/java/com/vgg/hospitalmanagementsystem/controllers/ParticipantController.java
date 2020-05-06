@@ -1,7 +1,7 @@
 package com.vgg.hospitalmanagementsystem.controllers;
 
-import com.vgg.hospitalmanagementsystem.models.Session;
-import com.vgg.hospitalmanagementsystem.repositories.SessionRepository;
+import com.vgg.hospitalmanagementsystem.models.Participant;
+import com.vgg.hospitalmanagementsystem.repositories.ParticipantRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,39 +15,38 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/sessions")
-public class SessionsController{
+@RequestMapping("/participants")
+public class ParticipantController {
     @Autowired
-    private SessionRepository sessionRepository;
+    private ParticipantRepository participantRepository;
 
     @GetMapping
-    public List<Session> list(){
-        return sessionRepository.findAll();
+    public List<Participant> list() {
+        return participantRepository.findAll();
     }
 
     @GetMapping
     @RequestMapping("{id}")
-    public Session get(@PathVariable Long id){
-        return sessionRepository.getOne(id);
+    public Participant get(@PathVariable Long id) {
+        return participantRepository.getOne(id);
     }
     @PostMapping
 //    @ResponseStatus(HttpStatus.CREATED)
-    public Session create(@RequestBody final Session session){
-        return sessionRepository.saveAndFlush(session);
+    public Participant create(@RequestBody final Participant participant){
+        return participantRepository.saveAndFlush(participant);
     }
-
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable Long id) {
         //Also, need to check for children records before deleting.
-        sessionRepository.deleteById(id);
+        participantRepository.deleteById(id);
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.PUT)
-    public Session update(@PathVariable Long id, @RequestBody Session session) {
+    public Participant update(@PathVariable Long id, @RequestBody Participant participant) {
         //because this is a PUT, we expect all attributes to be passed in. A PATCH would only need...
         //TODO: Add validation that all attributes are passed in, otherwise return a 400 bad payload
-        Session existingSession = sessionRepository.getOne(id);
-        BeanUtils.copyProperties(session, existingSession, "session_id");
-        return sessionRepository.saveAndFlush(existingSession);
+        Participant existingParticipant = participantRepository.getOne(id);
+        BeanUtils.copyProperties(participant, existingParticipant, "participant_id");
+        return participantRepository.saveAndFlush(existingParticipant);
     }
 }
